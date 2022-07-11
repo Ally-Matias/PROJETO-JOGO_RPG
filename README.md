@@ -13,3 +13,6 @@ O objetivo da nossa aplicação é primeiramente divertir e fazer o jogador part
 
 ##
 
+## Diagrama UML
+
+![](UML.jpg)
