@@ -1,0 +1,46 @@
+-Alliquison Matias da Silva Fábio Eduardo Benício Pereira
+
+-PROGRAMAÇÃO ORIENTADA A OBJETOS RPG INTERATIVO
+
+-Julho de 2022 
+
+
+1.	CONTEXTO DO SOFTWARE
+
+O software se trata de um jogo RPG (role-playing game: um gênero de jogo no qual os jogadores assumem o papel de personagens fantasiosos, em um mundo fictício), nesse jogo os jogadores entraram em batalhas virtuais e terão múltiplas escolhas que irão definir seu caminho e evolução, cada cenário pode mudar de acordo com o as escolhas do jogador e consequentemente mostrar um final diferente.
+O player terá a dinâmica do jogo afetada pela classe em que foi iniciado, essas que podem ser “Guerreiro”, “Mago” ou “Assassino”. Essas classes definem a maneira com que seu personagem evolui e usa suas habilidades. O jogo terá um cenário e cada cenário terá uma história, tudo isso será descrito por texto, e nessa história o jogador poderá adquirir itens, cada item podendo ser dos tipos: armaduras e armas (essas que podem ou não ser encantadas). Além disso, durante os cenáros, você vai se deparar com NPCs (Non-Player Characters, personagens ou entidades controladas e predeterminadas pelo programa), podendo realizar interações ou ter que engajar em um combate. Entretanto, o grande foco serão os momentos onde o jogador se depara com situações em que terá de tomar uma escolha, e essa escolha poderá mudar a sequência de eventos daquele cenário.
+O objetivo da nossa aplicação é primeiramente divertir e fazer o jogador participar de batalhas e histórias em um mundo de fantasia digital. Criando um personagem e evoluindo ele até se tornar poderoso e capaz de derrotar qualquer inimigo. Além disso, é importante ressaltar que todos os cenários são únicos e sua trama e estrutura foram criados do zero por alguém, por isso não necessariamente estão relacionados. 
+
+2.	FUNCIONALIDADES
+
+
+O jogo funcionará com base em um menu principal, capaz de criar, selecionar e deletar personagens, além disso, também poderá abrir um ranking com os top10 players mais evoluídos, metrificando essse ranking por meio de uma lista local que copia a lista principal de personagens e ordena eles com base na quantidade de pontos de experiência, para poder usar os pontos de experiência como um parametro de comparação, a classe Player implementou a interface interface comparable, que permite definir o critério de ordenação nas subclasses em comparação com as outras. Ao selecionar a opção de iniciar o jogo, o usuário irá selecionar um Player (personagem) que está presente num arraylist estático da classe Personagens, passando esse Player como o parametro para o método de menu de jogo, esse método permite tomar ações com base no Player, podendo editar seu nome, mostrar e visualizar os atributos atuais do personagem, abrir um pequeno texto tutorial para aprender como o jogo funciona e por fim e mais importante, selecionar um cenário para jogar. Cada cenário é uma sequência de métodos que além de contar histórias e acontecimentos, gerencia batalhas e modifica o personagem. O player então evolui podendo entrar novamente nos mesmos cenários só que agora mais poderoso, o jogo seguirá aberto para a sugestão e contribuição de novos cenários por parte de apreciadores e colegas que queiram ajudar na melhoria do jogo.
+O Player é a superclasse abstrata de Guerreiro, Mago e Assassino, ela possui um método estático de batalha que serve para que os cenários executem passando as instancias do player e npc que irão lutar, além disso, estabelece métodos padrão que serão usadas por todas as subclasses e métodos abstratos que as subclasses deverão implementar de forma única, pois são esses métodos que definem as particularidades e maneiras diferentes que elas interagem ao iniciar batalhas, por exemplo, cada classe evolui de nível e tem a progressão diferente pois decidem de maneira única como vão implementar o método setValues, que serve para a incrementação de atributos ao subir de nível.
+Ao entrar em combate em algum cenário, o personagem entrará no método estático batalha, que cria um loop de turnos, que se encerrará caso o personagem morra, ou o adversário (NPC) tenha seus pontos de vida zerados. Durante a batalha o personagem poderá escolher entre atacar ou usar alguma habilidade. O turno do personagem é um método abstrato, pois cada classe tem maneiras diferentes de atacar e usar habildiades, o método de ataque é feito com base nos atributos de ataque do item que o personagem esteja equipando naquele momento, já as habilidades são movimentos especiais que dependem da classe que o jogador escolheu na criação de personagem, as habilidades são dispostas de acordo com o turno da classe, e são chamadas como métodos únicos da classe. Para realizar todos os cálculos, são usados valores random, com limites estabelecidos pelos atributos dos players e npcs. Isso contribui para que cada um dos combates seja único e que o jogador nunca tenha certeza de vencer ao entrar no cenário. A classe NPC é também uma classe abstrata, que implementa atributos padrão e um método de turno abstrato, que deve ser feito de maneira única por cada npc, pois as criaturas e inimigos tem a possibilidade de atacar e usar hablilidades também de maneira totalmente única.
+O código do jogo foi dividido em três partes, a classe Main, que executa o código, uma pasta chamada Models, que guarda todas as classes abstratas e instanciaveis, e por fim uma pasta chamada Controllers, que guarda classes com atributos ou métodos estáticos, que servem para funcionalidades na Main e nas classes da Models. As classes da pasta Controllers são usadas para realizar testes, executar a persistência de dados ou estabelecer as constantes estáticas responsáveis pela estilização de cores no console.
+
+
+3.	PERSISTÊNCIA DE DADOS
+
+
+Para que o jogo mantenha suas informações, só é preciso que a instância dos personagens (Player) seja gravada junto da instância dos itens estão equipados. Para isso, usamos as bibliotecas java.io: FileWriter, FileReader, BufferedWriter e BufferedReader. Essas classes foram usadas para criar arquivos de texto na pasta do código com strings nas linhas que são transformadas em variaveis, essas variáveis são usadas pelo leitor de arquivos para executar um método construtor alternativo nas subclasses de Player que refaz o personagem da mesma maneira que estava ao escrever o arquivo e fechar o jogo.
+
+
+4.	DIVISÃO DO PROJETO
+
+A divisão de responsabilidades para a equipe foi feita da seguinte maneira: Alliquison fez a estruturação de parte dos cenários, estabeleceu textos e a parte criativa do funcionamento do jogo, criou e subdividiu as habilidades das classes: Mago, Guerreiro e Assassino. Além disso, implementou a interface comparable junto do sistema de ranking do menu principal, criou a estrutura corpo e subdivisões do relatório e por fim também realizou pesquisas de cunho criativo e técnico. 
+Fábio estruturou também outra parte dos cenários, ficou responsável pela modelação da main e métodos estáticos das classes de Controllers, criou interações entre as entidades do código, escreveu parte do relatório e programou o sistema de persistência de dados.
+E por fim, os dois trabalharam juntamente em reuniõs para decisões criativas, técnicas, e processuais, realizando intervenções, pesquisas para gerar mais conteúdo para o jogo e criando a UML e relatório finais. Além disso, é importante notar o entendimento geral e a lógica de funcionamento do software, que foram estabelecidos em conjunto.
+
+
+5.	CONSIDERAÇÕES FINAIS
+
+O projeto foi realizado com inspiração em RPGs de Mesa (Role Playing Game), jogos muito populares pela cultura geek de todo o mundo, que consiste em atuação e batalhas usando cálculo, papel, caneta e dados. O início desses jogos foi em 1974 por Gary Gygax quando criou Dungeons and Dragons, uma obra inspirada na Obra Senhor dos Anéis de Tolkien. Os RPGs vem sendo uma febre desde então sendo a inspiração principal para obras famosas de hoje em dia, como a Caverna do Dragão (que em inglês se chama Dungeons and Dragons), Stranger Things (Toda a trama e criaturas são inspiradas na grande febre que os livros e aventuras de D&D representavam pra muitos jovens dos anos 80. Para fazer esse projeto, usamos uma acervo de livros de RPG e jogadores conhecidos como fonte de informação para incrementar o jogo. 
+Entretanto, o jogo mesmo estando complexo e cheio de funcionalidades, ainda irá receber muitas outras adições que virão com o tempo. Atualmente já iniciamos a trabalhar no sistema de Inventário, manipulação e utilização de itens, que permitirá uma interação ainda maior entre o Player e os cenários. 
+Além de cenários que podem ser criados por qualquer um e enviados a nós para que adaptemos no jogo e mantenhamos o nome do criador ao fim da aventura, também já preparamos a base do código e iremos implementar no jogo sistemas para: Mana, Venda e Compra de Itens, Batalhas PvP. Tudo isso se deve ao fato de que a maneira com que as classes e o jogo foram estruturados, permite a fácil adição de novas funcionalidades sem grande alteração de sua base. 
+Por fim vale ressaltar que foi um projeto muito divertido e que está e vai continuar evoluindo mesmo a após a cadeira ser finalizada, todo o progresso poderá ser acompanhado pelo nosso GitHub: 
+https://github.com/FabioEdu
+https://github.com/Ally-Matias
+
+
+
